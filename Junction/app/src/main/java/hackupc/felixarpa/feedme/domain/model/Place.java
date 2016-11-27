@@ -1,4 +1,4 @@
-package hackupc.felixarpa.feedme;
+package hackupc.felixarpa.feedme.domain.model;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,11 +89,14 @@ public class Place {
         return result;
     }
 
-    public static ArrayList<Place> fromJSONArray(JSONArray array) throws JSONException {
+    public static ArrayList<Place> fromJSONArray(JSONArray array) {
         ArrayList<Place> result = new ArrayList<>();
         int length = array.length();
         for (int i = 0; i < length; i++) {
-            result.add(Place.fromJSONObject(array.getJSONObject(i)));
+            try {
+                result.add(Place.fromJSONObject(array.getJSONObject(i)));
+            } catch (JSONException ignored) {
+            }
         }
         return result;
     }

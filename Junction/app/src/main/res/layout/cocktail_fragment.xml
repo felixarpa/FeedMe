@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_blue_900">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_image"
+        android:src="@mipmap/cocktail"
+        android:tint="@color/md_yellow_500"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/food"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_margin="32dp"
+        android:textStyle="italic|bold"
+        android:layout_below="@+id/action_image"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/md_yellow_500"
+        android:text="COCKTAIL"/>
+
+
+
+</RelativeLayout>

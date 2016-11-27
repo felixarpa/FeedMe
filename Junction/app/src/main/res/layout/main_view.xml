@@ -4,12 +4,19 @@
     android:id="@+id/main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hackupc.felixarpa.feedme.MainViewController">
+    android:background="@color/grey"
+    tools:context="hackupc.felixarpa.feedme.presentation.MainViewController">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/settings"
@@ -17,7 +24,7 @@
         android:layout_height="56dp"
         android:padding="12dp"
         android:src="@drawable/settings"
-        android:tint="@color/colorPrimary"
+        android:tint="@color/md_white_1000"
         android:contentDescription="@string/settings"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
