@@ -14,7 +14,7 @@ public class ApiService {
     private static Context serviceContext;
 
     private final static String BASE_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-    private final static String API_KEY = "AIzaSyBPJnmI875t0xrKThJuLzIIZ8NckFHHqI0";
+    public final static String API_KEY = "AIzaSyBPJnmI875t0xrKThJuLzIIZ8NckFHHqI0";
 
     private static ApiService ourInstance = new ApiService();
 
@@ -41,7 +41,7 @@ public class ApiService {
 
         request.addParam("key", API_KEY);
         request.addParam("location", String.valueOf(latitude) + "," + String.valueOf(longitude));
-        request.addParam("radius", 2000);
+        request.addParam("radius", getRadius());
         request.addParam("type", "restaurant");
         request.addParam("keyword", keyword);
 
@@ -50,6 +50,15 @@ public class ApiService {
 
         request.send();
 
+    }
+
+    public int getRadius() {
+        SharedPreferences sp = serviceContext.getSharedPreferences(
+                ViewCtrlUtils.SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE
+        );
+
+        return sp.getInt(ViewCtrlUtils.RADIUS, 1) * 1000;
     }
 
     public Pair<Float, Float> getCurrentLocation() {

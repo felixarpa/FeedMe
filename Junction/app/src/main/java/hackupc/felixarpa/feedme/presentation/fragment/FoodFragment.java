@@ -19,7 +19,7 @@ import hackupc.felixarpa.feedme.domain.ApiService;
 import hackupc.felixarpa.feedme.presentation.PlacesViewController;
 import hackupc.felixarpa.feedme.presentation.ViewCtrlUtils;
 
-public class FoodFragment extends Fragment {
+public class FoodFragment extends Fragment implements View.OnClickListener {
 
     private String keyWord;
     private int layoutResource;
@@ -44,42 +44,41 @@ public class FoodFragment extends Fragment {
         action = (ImageView) rootView.findViewById(R.id.action_image);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress);
         text = (TextView) rootView.findViewById(R.id.text);
-        action.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        action.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        text.setVisibility(View.GONE);
-                        ApiService.getInstance(getActivity()).findPlaces(
-                                keyWord,
-                                new OnSuccess() {
-                                    @Override
-                                    public void onSuccess(Response response) {
-                                        action.setVisibility(View.VISIBLE);
-                                        progressBar.setVisibility(View.GONE);
-                                        text.setVisibility(View.VISIBLE);
-                                        Intent intent = new Intent(getContext(), PlacesViewController.class);
-                                        intent.putExtra(ViewCtrlUtils.JSON, response.getMessage());
-                                        intent.putExtra(ViewCtrlUtils.FOOD_KIND, keyWord);
-                                        getActivity().startActivity(intent);
-                                    }
-                                },
-                                new OnFailure() {
-                                    @Override
-                                    public void onFailure(Response response) {
-                                        action.setVisibility(View.VISIBLE);
-                                        progressBar.setVisibility(View.GONE);
-                                        text.setVisibility(View.VISIBLE);
-                                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                        );
-                    }
-                }
-        );
+        action.setOnClickListener(this);
+        text.setOnClickListener(this);
+//        rootView.setOnClickListener(this);
         return rootView;
     }
 
 
+    @Override
+    public void onClick(View view) {
+        action.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        text.setVisibility(View.GONE);
+        ApiService.getInstance(getActivity()).findPlaces(
+                keyWord,
+                new OnSuccess() {
+                    @Override
+                    public void onSuccess(Response response) {
+                        action.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(getContext(), PlacesViewController.class);
+                        intent.putExtra(ViewCtrlUtils.JSON, response.getMessage());
+                        intent.putExtra(ViewCtrlUtils.FOOD_KIND, keyWord);
+                        getActivity().startActivity(intent);
+                    }
+                },
+                new OnFailure() {
+                    @Override
+                    public void onFailure(Response response) {
+                        action.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
 }

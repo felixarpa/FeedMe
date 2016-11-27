@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import hackupc.felixarpa.feedme.domain.ApiService;
+
 public class Place {
 
     private Double latitude;
@@ -78,7 +80,11 @@ public class Place {
     public static Place fromJSONObject(JSONObject object) throws JSONException {
         Place result = new Place();
 
-        result.setIcon(object.getString("icon"));
+        result.setIcon("https://maps.googleapis.com/maps/api/place/photo" +
+                "?maxwidth=400" +
+                "&photoreference=" + object.getJSONArray("photos").getJSONObject(0).getString("photo_reference") +
+                "&key=" + ApiService.API_KEY
+        );
         result.setId(object.getString("id"));
         result.setLatitude(object.getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
         result.setLongitude(object.getJSONObject("geometry").getJSONObject("location").getDouble("lng"));

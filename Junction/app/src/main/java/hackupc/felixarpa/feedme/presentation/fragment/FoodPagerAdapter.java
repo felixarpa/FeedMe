@@ -48,7 +48,7 @@ public class FoodPagerAdapter extends FragmentPagerAdapter {
 
             case 3:
                 fragment = new FoodFragment(
-                        "hamburger_fragment",
+                        "hamburger",
                         R.layout.hamburger_fragment,
                         "There are no hamburger_fragment restaurants nearby"
                 );

@@ -10,6 +10,7 @@ public class ViewCtrlUtils {
     public static final String LONGITUDE = "lng";
     public static final String JSON = "json";
     public static final String FOOD_KIND = "fk";
+    public static final String RADIUS = "RAD";
 
     public static int getColor(Context context, int resourceId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

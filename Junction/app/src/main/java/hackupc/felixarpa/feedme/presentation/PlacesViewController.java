@@ -37,6 +37,36 @@ public class PlacesViewController extends AppCompatActivity implements View.OnCl
 
         LinearLayout list = (LinearLayout) findViewById(R.id.places_list);
 
+        String type = getIntent().getExtras().getString(ViewCtrlUtils.FOOD_KIND, "blank");
+
+        System.out.println("LOL " + type);
+        int color = -1;
+        if (type.equals("coffee")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_brown_100);
+        } else if (type.equals("pizza")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_orange_100);
+        } else if (type.equals("veggie")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_green_100);
+        } else if (type.equals("hambuger")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_yellow_100);
+        } else if (type.equals("meat")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_red_100);
+        } else if (type.equals("sushi")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_green_100);
+        } else if (type.equals("pasta")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_brown_100);
+        } else if (type.equals("mexican")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_red_100);
+        } else if (type.equals("cocktail")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_blue_100);
+        } else if (type.equals("fish")) {
+            color = ViewCtrlUtils.getColor(this, R.color.md_blue_100);
+        }
+
+        if (color != -1) {
+            list.setBackgroundColor(color);
+        }
+
         try {
             String jsonStr = getIntent().getExtras().getString(ViewCtrlUtils.JSON, "asdf");
             JSONObject jsonObject = new JSONObject(jsonStr);
@@ -60,6 +90,7 @@ public class PlacesViewController extends AppCompatActivity implements View.OnCl
             index.setText(String.valueOf(i));
             name.setText(places.get(i).getName());
             rating.setText(String.valueOf(places.get(i).getRating()));
+
             ImageLoader.getInstance().displayImage(places.get(i).getIcon(), imageView);
 
             veiw.setOnClickListener(this);
